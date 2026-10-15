@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Суслов Иван · AI Engineer</title>
+<meta name="description" content="Суслов Иван, AI Engineer. LLM-агенты и инфраструктура под них: агент с RAG в production, backend, DevOps.">
+<meta name="theme-color" content="#141416">
+<link rel="canonical" href="https://dverkuoff.github.io/">
+<meta property="og:title" content="Суслов Иван · AI Engineer">
+<meta property="og:description" content="LLM-агенты и инфраструктура под них: агент с RAG в production, backend, DevOps.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dverkuoff.github.io/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://dverkuoff.github.io/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Суслов Иван, AI Engineer: LLM-агенты и инфраструктура под них">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%23A78BFA'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141416; --text:#ECECEF; --muted:#A3A3AD; --dim:#74747E;
+  --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.08);
+  --accent:#A78BFA; --accent2:#F0A97A;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font:500 16px/1.55 'Manrope',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;
+}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(28vw 36vw at 2vw 78vh, rgba(124,77,255,.42), transparent 70%),
+    radial-gradient(22vw 28vw at 14vw 48vh, rgba(190,90,70,.28), transparent 70%),
+    radial-gradient(30vw 22vw at 10vw 6vh, rgba(90,110,100,.18), transparent 70%);}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(167,139,250,.35)}
+
+.page{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:56px 40px 64px;
+  display:grid;grid-template-columns:250px minmax(0,1fr) 280px;column-gap:48px;
+  grid-template-areas:"left main right"}
+.left{grid-area:left}.main{grid-area:main}.right{grid-area:right}
+.left>div,.right>div{position:sticky;top:40px}
+
+/* Заголовки секций как в резюме */
+.sec{display:flex;justify-content:space-between;align-items:baseline;
+  font:500 .75rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.sec .n{color:var(--text);font-weight:600}
+section+section{margin-top:44px}
+
+/* Шапка */
+h1{font-size:clamp(2.6rem,4.6vw,3.6rem);font-weight:800;line-height:1;letter-spacing:-.02em}
+.role{margin-top:16px;font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.role .sub{display:block;color:var(--dim)}
+.about{margin-top:18px;color:var(--muted);max-width:640px;font-size:1.05rem}
+.about b{color:var(--text);font-weight:700}
+
+/* Контакты */
+.contacts{list-style:none;font:500 .9rem/1.4 var(--mono)}
+.contacts li+li{margin-top:9px}
+.contacts a{border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
+.contacts a:hover{color:var(--accent);border-color:rgba(167,139,250,.5)}
+.contacts small{display:block;color:var(--dim);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* Хакатоны */
+.hack+.hack{margin-top:22px}
+.place{font:500 .72rem var(--mono);letter-spacing:.06em;color:var(--accent2);text-transform:uppercase}
+.place b{font:800 1.6rem 'Manrope';color:var(--text);letter-spacing:0;margin-right:6px;vertical-align:-3px}
+.hack h3{font-size:1rem;font-weight:700;margin-top:4px;line-height:1.3}
+.hack p{color:var(--muted);font-size:.88rem;line-height:1.45;margin-top:3px}
+.hack .my{color:var(--text);font-size:.85rem;margin-top:5px}
+.hack a{border-bottom:1px solid rgba(167,139,250,.5);transition:color .15s}.hack a:hover{color:var(--accent)}
+.proj a.code{border-bottom:1px solid rgba(167,139,250,.5);transition:color .15s}.proj a.code:hover{color:var(--accent)}
+.nb{white-space:nowrap}
+p,li,figcaption{text-wrap:pretty}
+h1,h3{text-wrap:balance}
+.tags i{font-style:normal;color:var(--dim)}
+
+/* Образование */
+.years{font:500 .75rem var(--mono);color:var(--dim)}
+.edu h3{font-size:1.3rem;font-weight:800;margin-top:4px}
+.edu p{color:var(--muted);margin-top:2px;font-size:.92rem}
+
+/* Проекты */
+.proj+.proj{margin-top:44px;padding-top:36px;border-top:1px solid var(--line-2)}
+.proj h3{font-size:1.35rem;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.badges{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+.badge{font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+  border:1px solid rgba(167,139,250,.45);border-radius:4px;padding:2px 7px}
+.proj>p{margin-top:12px;color:var(--muted);max-width:680px}
+.proj ul{list-style:none;margin-top:12px;max-width:680px}
+.proj li{position:relative;padding-left:20px;color:var(--muted)}
+.proj li+li{margin-top:6px}
+.proj li::before{content:"";position:absolute;left:3px;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.proj li b{color:var(--text);font-weight:700}
+.res{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px 28px}
+.res div{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.res b{display:block;font:800 1.7rem/1.1 'Manrope';letter-spacing:-.02em;text-transform:none;color:var(--accent2);margin-bottom:2px}
+.tech{display:flex;flex-wrap:wrap;margin-top:14px;font:500 .8rem/1.6 var(--mono);color:var(--text)}
+.tech span{white-space:nowrap}
+.tech i{font-style:normal;color:var(--dim);padding:0 4px}
+.shot{margin-top:18px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0e0e10}
+.shot img{cursor:zoom-in}
+.shot figcaption{font:500 .74rem/1.4 var(--mono);color:var(--dim);padding:9px 12px;border-top:1px solid var(--line-2)}
+
+/* Стек */
+.grp+.grp{margin-top:20px}
+.grp h4{font:500 .68rem var(--mono);letter-spacing:.08em;color:var(--dim);text-transform:uppercase;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:.82rem;font-weight:500;line-height:1;padding:6px 10px;border:1px solid var(--line);border-radius:99px;
+  color:var(--text);background:rgba(255,255,255,.03);white-space:nowrap}
+.learn{list-style:none}
+.learn li{line-height:1.4}
+.learn small{display:block;color:var(--dim);font-size:.85rem}
+
+.cta{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;font-weight:700;font-size:.92rem;padding:10px 16px;border-radius:10px;
+  background:var(--text);color:#141416;transition:transform .1s ease-out,opacity .15s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:rgba(167,139,250,.6)}
+
+footer{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:22px 40px 32px;border-top:1px solid var(--line-2);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+
+.lb{position:fixed;inset:0;z-index:50;pointer-events:none}
+.lb::before{content:"";position:absolute;inset:0;background:rgba(10,10,12,.88);opacity:0;transition:opacity .32s cubic-bezier(.23,1,.32,1)}
+.lb.open{pointer-events:auto;cursor:zoom-out}
+.lb.open::before{opacity:1}
+.lb img{position:absolute;left:0;top:0;transform-origin:0 0;border-radius:10px;border:1px solid var(--line);
+  transition:transform .32s cubic-bezier(.23,1,.32,1);will-change:transform}
+.shot{transition:border-color .15s ease-out}
+@media (hover:hover) and (pointer:fine){.shot:hover{border-color:rgba(167,139,250,.55)}}
+.left,.main,.right{animation:enter .45s cubic-bezier(.23,1,.32,1) both}
+.main{animation-delay:.06s}.right{animation-delay:.12s}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}}
+
+@media (max-width:1100px){
+  .page{grid-template-columns:240px minmax(0,1fr);grid-template-areas:"left main" "left right"}
+  .right>div{position:static;margin-top:48px}
+}
+@media (max-width:760px){
+  .page{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "right" "left";padding:32px 16px 48px}
+  .left>div,.right>div{position:static}
+  .right>div,.left>div{margin-top:44px}
+  .bgfx{background:radial-gradient(90vw 70vh at 0 100%, rgba(124,77,255,.35), transparent 70%),radial-gradient(70vw 50vh at 20% 60%, rgba(190,90,70,.2), transparent 70%)}
+  footer{padding:20px 16px 28px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.left,.main,.right{animation:fade .2s ease both}@keyframes fade{from{opacity:0}}.lb img{transition:none}.lb::before{transition:opacity .15s}}
+</style>
+</head>
+<body>
+<div class="bgfx" aria-hidden="true"></div>
+
+<div class="page">
+  <!-- Левая колонка -->
+  <aside class="left"><div>
+    <section>
+      <div class="sec"><span>Контакты</span><span class="n">01</span></div>
+      <ul class="contacts">
+        <li><small>Telegram</small><a href="https://t.me/Dverku_oFF">@Dverku_oFF</a></li>
+        <li><small>Почта</small><a href="mailto:work@dverkuoff.uk">work@dverkuoff.uk</a></li>
+        <li><small>GitHub</small><a href="https://github.com/DverkuOff">github.com/dverkuoff</a></li>
+        <li><small>Город</small><span>Москва · гибрид / удалённо</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec"><span>Хакатоны 2026</span><span class="n">02</span></div>
+      <div class="hack">
+        <div class="place"><b>2</b>место</div>
+        <h3>Хакатон Московского&nbsp;транспорта</h3>
+        <p>Трек «Предиктор изменений в&nbsp;графике движения» · МТТЕХ, призовой фонд 4&nbsp;млн&nbsp;₽ · <a href="https://github.com/DverkuOff/foresight">код&nbsp;решения&nbsp;↗</a></p>
+        <p class="my">ML на CatBoost, backend на FastAPI</p>
+      </div>
+      <div class="hack">
+        <div class="place"><b>2</b>место</div>
+        <h3>Финал КосмоХакатона, Москва</h3>
+        <p>Кейс «Безопасный маршрут» · 40&nbsp;команд в&nbsp;финале · <a href="https://xn--80aa2abijcbdyq6a.xn--p1ai/final/#winners">итоги, «Рапира&nbsp;Клауд»&nbsp;↗</a></p>
+        <p class="my">Навигация тележки при&nbsp;потере GPS: фильтр Калмана</p>
+      </div>
+      <div class="hack">
+        <div class="place"><b>2</b>место</div>
+        <h3>КосмоХакатон, Нижний&nbsp;Новгород</h3>
+        <p>Окружной этап · кейс по&nbsp;спутниковой группировке, выход в&nbsp;финал · <a href="https://xn--80aa2abijcbdyq6a.xn--p1ai/nizhny/#winners">итоги, «Рапира&nbsp;Клауд»&nbsp;↗</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec"><span>Образование</span><span class="n">03</span></div>
+      <div class="edu">
+        <div class="years">2025 → 2029</div>
+        <h3>МАДИ</h3>
+        <p>Информатика и вычислительная техника, 2 курс, заочно</p>
+        <p>Английский B2</p>
+      </div>
+    </section>
+  </div></aside>
+
+  <!-- Центр -->
+  <main class="main">
+    <header>
+      <h1>Суслов Иван</h1>
+      <div class="role">AI Engineer<span class="sub">LLM Agents · DevOps</span></div>
+      <p class="about">Строю <b>LLM-агентов и инфраструктуру под них</b>: от self-hosted моделей на своём GPU до production-сервисов с RAG, интеграциями и передачей диалога человеку. <b class="nb">3 призовых места</b> на хакатонах в 2026 году.</p>
+      <div class="cta">
+        <a class="btn" href="https://t.me/Dverku_oFF">Написать в Telegram</a>
+        <a class="btn ghost" href="https://github.com/DverkuOff">GitHub</a>
+      </div>
+    </header>
+
+    <section style="margin-top:52px">
+      <div class="sec"><span>Опыт и проекты</span><span class="n">04</span></div>
+
+      <article class="proj">
+        <h3>AI-агент для пресейла серверного оборудования</h3>
+        <div class="badges"><span class="badge">Production</span><span class="badge">LLM-агент + RAG</span><span class="badge">2025 → 2026</span></div>
+        <p>Компания собирает под заказ серверы, СХД и сетевое оборудование, в том числе для госзаказчиков по 44-ФЗ и 223-ФЗ. Агент ведёт клиента от запроса до готового КП, менеджер подключается в конце.</p>
+        <p><b style="color:var(--text)">Моя роль:</b> основу заложил предыдущий разработчик, я довёл систему до production. Все сценарии в n8n, векторизация базы знаний и RAG, сервис подбора комплектующих, веб-конфигуратор, доработка админки менеджера.</p>
+        <ul>
+          <li><b>Сценарии в n8n:</b> роутеры Telegram и почты, LLM-сервис, отправка ответов и КП, API веб-конфигуратора</li>
+          <li><b>RAG</b> по базе знаний: правила подбора, профили нагрузок, troubleshooting; суммаризация вложений клиента</li>
+          <li><b>Подбор комплектующих без LLM:</b> мой сервис на FastAPI подбирает сборку по правилам поверх каталога в PostgreSQL и выпускает КП и ТЗ по 44-ФЗ и 223-ФЗ</li>
+          <li><b>Ответ в JSON по схеме</b> с проверкой и маршрутизацией: текст клиенту, спецификация или передача человеку</li>
+          <li><b>Админка менеджера:</b> диалоги в реальном времени, AI ON/OFF</li>
+          <li><b>Трейсы и версии промптов</b> в Langfuse</li>
+        </ul>
+        <div class="res">
+          <div><b>~15 мин</b>от заявки до КП вместо ~3 дней (на тестах)</div>
+        </div>
+        <div class="tech"><span>n8n</span><i>·</i><span>OpenRouter</span><i>·</i><span>Langfuse</span><i>·</i><span>Supabase</span><i>·</i><span>pgvector</span><i>·</i><span>PostgreSQL</span><i>·</i><span>Redis</span><i>·</i><span>S3</span><i>·</i><span>FastAPI</span><i>·</i><span>React</span><i>·</i><span>Docker</span><i>·</i><span>GitHub Actions</span></div>
+        <figure class="shot"><img src="assets/quasar-admin.webp" alt="Админка менеджера" loading="lazy" width="1600" height="955"><figcaption>Админка на демо-данных: агент доводит до КП, вопрос о скидке передаёт менеджеру</figcaption></figure>
+        <figure class="shot"><img src="assets/quasar-llm.webp" alt="LLM-сервис в n8n" loading="lazy" width="2000" height="372"><figcaption>LLM-сервис в n8n</figcaption></figure>
+      </article>
+
+      <article class="proj">
+        <h3>Self-hosted AI Lab: голосовой <span class="nb">LLM-пайплайн</span></h3>
+        <div class="badges"><span class="badge">Pet-проект</span><span class="badge">Пользуюсь сам</span></div>
+        <p>Распознавание и обработка речи на своём GPU, без облачных API.</p>
+        <ul>
+          <li>OpenWhispr подключается через <b>WireGuard-туннель</b> к <span class="nb">домашнему GPU-серверу</span></li>
+          <li>В WSL2 два Docker-сервиса: <b>whisper.cpp</b> для речи и <b>llama.cpp</b> для постобработки текста</li>
+          <li><b>Prometheus и Grafana:</b> RTF, перцентили времени ответа, GPU, VRAM, скорость LLM, ошибки</li>
+        </ul>
+        <div class="res">
+          <div><b>~1,5 мин</b>на часовую запись</div>
+          <div><b>0 ошибок</b>на 107 запросов за 30 дней</div>
+        </div>
+        <div class="tech"><span>whisper.cpp</span><i>·</i><span>llama.cpp</span><i>·</i><span>Docker</span><i>·</i><span>WSL2</span><i>·</i><span>WireGuard</span><i>·</i><span>Prometheus</span><i>·</i><span>Grafana</span></div>
+        <figure class="shot"><img src="assets/voice-grafana.webp" alt="Grafana" loading="lazy" width="1470" height="665"><figcaption>Grafana: метрики распознавания речи</figcaption></figure>
+      </article>
+
+      <article class="proj">
+        <h3>iPhone Searcher</h3>
+        <div class="badges"><span class="badge">Коммерческий проект</span><span class="badge">2025 → 2026</span></div>
+        <p>Telegram-бот по подписке присылает новые объявления о продаже iPhone по фильтрам и регионам. Проект переписали вдвоём с нуля, я отвечал за <b style="color:var(--text)">пайплайн данных</b>.</p>
+        <ul>
+          <li>Получение новых объявлений в реальном времени, очередь в <b>RabbitMQ</b>, дедупликация и гибкие фильтры</li>
+          <li>Рассылку вынес в <b>отдельный сервис на Go</b>: сбор больше не ждёт рассылку</li>
+        </ul>
+        <div class="res">
+          <div><b>~50</b>активных подписчиков</div>
+          <div><b>30+</b>городов</div>
+        </div>
+        <div class="tech"><span>Python</span><i>·</i><span>Go</span><i>·</i><span>RabbitMQ</span><i>·</i><span>PostgreSQL</span><i>·</i><span>Docker</span></div>
+        <figure class="shot"><img src="assets/isa-subscribers.webp" alt="Подписчики по городам" loading="lazy" width="1600" height="904"><figcaption>Админка проекта, вкладка Telegram, личные данные скрыты</figcaption></figure>
+      </article>
+      <article class="proj">
+        <h3>Kubernetes-стенд одной командой</h3>
+        <div class="badges"><span class="badge">Кейс хакатона</span><span class="badge">10.2026</span></div>
+        <p>Скрипт превращает чистую Ubuntu 24.04 в кластер Kubernetes (kubeadm) с веб-приложением по HTTPS за 6–10 минут. Повторный запуск ничего не меняет.</p>
+        <ul>
+          <li><b>Gateway API</b> на Traefik: TLS через cert-manager, canary 80/20</li>
+          <li><b>Prometheus и Grafana</b>, логи через Fluentd в Loki</li>
+          <li><b>e2e-деплой</b> в GitHub Actions на amd64 и arm64</li>
+        </ul>
+        <div class="tech"><span>kubeadm</span><i>·</i><span>Calico</span><i>·</i><span>Helm</span><i>·</i><span>Traefik</span><i>·</i><span>cert-manager</span><i>·</i><span>Prometheus</span><i>·</i><span>Loki</span><i>·</i><span>Grafana</span></div>
+        <p><a class="code" href="https://github.com/DverkuOff/kube-gateway-stand">Код: github.com/DverkuOff/kube-gateway-stand&nbsp;↗</a></p>
+      </article>
+      <article class="proj">
+        <h3>Фриланс</h3>
+        <div class="badges"><span class="badge">20+ заказов</span><span class="badge">2024 → сейчас</span></div>
+        <p>Telegram-боты, парсеры, интеграции с API и CRM, настройка серверов, LLM-автоматизации.</p>
+        <ul>
+          <li><b>CI/CD на GitHub Actions:</b> образ в GHCR, деплой на staging и prod, откат на прошлый образ</li>
+          <li><b>Terraform, cloud-init и Ansible:</b> серверы в Timeweb Cloud, SSH только по ключам, UFW, fail2ban, Docker, Traefik</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <!-- Правая колонка -->
+  <aside class="right"><div>
+    <section>
+      <div class="sec"><span>Стек</span><span class="n">05</span></div>
+      <div class="grp"><h4>AI / LLM</h4><div class="tags"><span>LLM-агенты</span><span>RAG</span><span>MCP</span><span>n8n</span><span>Langfuse</span><span>llama.cpp</span><span>Whisper</span></div></div>
+      <div class="grp"><h4>Backend</h4><div class="tags"><span>Python</span><span>FastAPI</span><span>aiogram</span><span>SQLAlchemy</span><span>Go</span><span>Gin</span><span>REST</span><span>gRPC</span><span>WebSocket</span></div></div>
+      <div class="grp"><h4>Данные</h4><div class="tags"><span>PostgreSQL</span><span>Redis</span><span>RabbitMQ</span><span>pgvector</span><span>Qdrant <i>базово</i></span><span>MongoDB</span><span>MinIO</span></div></div>
+      <div class="grp"><h4>Облако</h4><div class="tags"><span>Supabase</span><span>Timeweb Cloud</span><span>S3</span></div></div>
+      <div class="grp"><h4>Infra / DevOps</h4><div class="tags"><span>Docker</span><span>Docker Compose</span><span>Docker Swarm <i>базово</i></span><span>Kubernetes <i>базово</i></span><span>Linux</span><span>Bash</span><span>Nginx</span><span>Traefik</span><span>GitHub Actions</span><span>Terraform</span><span>Ansible</span><span>WireGuard</span></div></div>
+      <div class="grp"><h4>Observability</h4><div class="tags"><span>Prometheus</span><span>Grafana</span><span>Alertmanager</span><span>node_exporter</span><span>Loki</span><span>Fluentd</span></div></div>
+    </section>
+
+    <section>
+      <div class="sec"><span>Изучаю</span><span class="n">06</span></div>
+      <ul class="learn"><li>Kubernetes: multi-node и HA<small>Argo CD, GitOps</small></li></ul>
+    </section>
+  </div></aside>
+</div>
+
+<footer><span>Суслов Иван · DverkuOff</span><span>AI Engineer · LLM Agents · DevOps</span></footer>
+
+<div class="lb" id="lb" aria-hidden="true"><img alt=""></div>
+<script>
+  const lb=document.getElementById('lb'),big=lb.querySelector('img');let src=null,timer=0;
+  big.style.visibility='hidden';
+  const fit=(w,h)=>{const s=Math.min((innerWidth-40)/w,(innerHeight-40)/h,1),W=w*s,H=h*s;return{x:(innerWidth-W)/2,y:(innerHeight-H)/2,W,H}};
+  const place=(r,t)=>{big.style.transform=`translate(${r.left}px,${r.top}px) scale(${r.width/t.W})`};
+  function reset(img){clearTimeout(timer);big.style.visibility='hidden';if(img)img.style.visibility=''}
+  function open(img){
+    if(src)reset(src);
+    const t=fit(img.naturalWidth,img.naturalHeight);
+    if(t.W<img.getBoundingClientRect().width*1.3){const a=document.createElement('a');a.href=img.currentSrc||img.src;a.target='_blank';a.rel='noopener';a.click();return}
+    src=img;big.src=img.currentSrc||img.src;big.alt=img.alt;big.style.width=t.W+'px';big.style.height=t.H+'px';
+    big.style.transition='none';place(img.getBoundingClientRect(),t);
+    big.style.visibility='visible';img.style.visibility='hidden';
+    lb.classList.add('open');lb.setAttribute('aria-hidden','false');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{big.style.transition='';big.style.transform=`translate(${t.x}px,${t.y}px) scale(1)`}));
+  }
+  function close(animate=true){
+    if(!src)return;const s=src;src=null;
+    lb.classList.remove('open');lb.setAttribute('aria-hidden','true');
+    if(!animate){reset(s);return}
+    place(s.getBoundingClientRect(),fit(s.naturalWidth,s.naturalHeight));
+    timer=setTimeout(()=>reset(s),340);
+  }
+  document.querySelectorAll('.shot img').forEach(i=>i.addEventListener('click',()=>open(i)));
+  lb.addEventListener('click',()=>close());
+  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  addEventListener('scroll',()=>close(false),{passive:true});
+  addEventListener('resize',()=>close(false));
+</script>
+<script>(()=>{const cols=document.querySelectorAll(".left>div,.right>div");const fit=()=>cols.forEach(c=>{c.style.position="";if(getComputedStyle(c).position==="sticky"&&c.offsetHeight>innerHeight-40)c.style.position="static"});addEventListener("resize",fit);addEventListener("load",fit);fit()})();</script>
+</body>
+</html>
